@@ -32,6 +32,37 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# database
+*.db
+*.sqlite
+*.sqlite3
+
+# sensitive config files
+config/secrets.json
+config/private.json
+**/secrets/**
+**/private/**
+
+# API keys and credentials
+api-keys.json
+credentials.json
+service-account.json
+*.pem
+*.key
+*.p12
+*.p8
+*.cer
+*.crt
+*.der
+
+# drizzle
+drizzle/migrations/*
+!drizzle/migrations/.gitkeep
 
 # vercel
 .vercel
