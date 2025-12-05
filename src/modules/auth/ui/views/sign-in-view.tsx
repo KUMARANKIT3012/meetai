@@ -4,6 +4,7 @@ import {z} from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import { OctagonAlertIcon } from "lucide-react";
 import {useRouter} from "next/navigation";
+import {FaGithub, FaGoogle} from "react-icons/fa";
 
 import {Input} from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
@@ -49,6 +50,7 @@ const onSubmit = (data: z.infer<typeof formSchema>) => {
         {
             email: data.email,
             password: data.password,
+            callbackURL: "/", // Redirect to home after sign-in
         },
         {
             onSuccess: () => {
@@ -61,9 +63,31 @@ const onSubmit = (data: z.infer<typeof formSchema>) => {
                 setError(error.message);
             }
         }
-    )
+    )   
+};
 
-    
+
+
+const onSocial = (provider: "github" | "google") => {
+    setError(null);
+    setPending(true);
+
+    authClient.signIn.social(
+        {
+            provider: provider,
+            callbackURL: "/", // Redirect to home after sign-in
+        },
+        {
+            onSuccess: () => {
+                setPending(false);
+
+            },
+            onError: ({error}) => {
+                setPending(false);
+                setError(error.message);
+            }
+        }
+    )  
 };
 
 
@@ -150,21 +174,23 @@ const onSubmit = (data: z.infer<typeof formSchema>) => {
                             {/* for Google */}
                             <Button
                             disabled={pending}
+                            onClick={() =>onSocial("google")}
                             variant="outline"
                             className="w-full"
                             type="button"
                             >
-                                Google
+                                <FaGoogle />
                             </Button>
 
                             {/* for Github */}
                             <Button
                             disabled={pending}
+                            onClick={() =>onSocial("github")}
                             variant="outline"
                             className="w-full"
                             type="button"
                             >
-                                Github
+                                <FaGithub />
                             </Button>
                         </div>
                         <div className="text-center text-sm">
