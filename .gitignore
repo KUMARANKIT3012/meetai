@@ -37,6 +37,14 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
+# Additional sensitive files
+.env
+*.log
+logs/
+*.tmp
+.cache/
+*.secret
+
 # database
 *.db
 *.sqlite
@@ -63,6 +71,21 @@ service-account.json
 # drizzle
 drizzle/migrations/*
 !drizzle/migrations/.gitkeep
+
+# Additional database files
+*.sql
+*.backup
+backup/
+dumps/
+
+# OAuth and Auth secrets
+.auth/
+auth-config.json
+oauth-config.json
+
+# Session and JWT secrets  
+jwt.secret
+session.secret
 
 # vercel
 .vercel
