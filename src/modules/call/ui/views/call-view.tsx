@@ -15,16 +15,22 @@ export const CallView = ({ meetingId }: Props) => {
   );
 
   if (data.status === "completed") {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <ErrorState
+          title="Meeting has ended"
+          description="You can no longer join this meeting"
+        />
+      </div>
+    );
+  }
+
   return (
-    <div className="flex h-screen items-center justify-center">
-      <ErrorState
-        title="Meeting has ended"
-        description="You can no longer join this meeting"
-      />
-    </div>
+    <CallProvider
+      meetingId={meetingId}
+      meetingName={data.name}
+      agentName={data.agent.name}
+      agentInstructions={data.agent.instructions}
+    />
   );
-}
-
-
-  return <CallProvider meetingId={meetingId} meetingName={data.name} />
 };

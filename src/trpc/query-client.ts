@@ -2,22 +2,30 @@ import {
   defaultShouldDehydrateQuery,
   QueryClient,
 } from '@tanstack/react-query';
-// import superjson from 'superjson';
+
 export function makeQueryClient() {
   return new QueryClient({
     defaultOptions: {
       queries: {
-        staleTime: 30 * 1000,
+        // Keep data fresh for 2 minutes
+        staleTime: 2 * 60 * 1000,
+        // Cache data for 10 minutes
+        gcTime: 10 * 60 * 1000,
+        // Don't refetch on window focus
+        refetchOnWindowFocus: false,
+        // Don't refetch on reconnect
+        refetchOnReconnect: false,
+        // Single retry for failed requests
+        retry: 1,
+        // Retry delay
+        retryDelay: 1000,
       },
       dehydrate: {
-        // serializeData: superjson.serialize,
         shouldDehydrateQuery: (query) =>
           defaultShouldDehydrateQuery(query) ||
           query.state.status === 'pending',
       },
-      hydrate: {
-        // deserializeData: superjson.deserialize,
-      },
+      hydrate: {},
     },
   });
 }

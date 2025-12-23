@@ -1,14 +1,16 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { CallControls, SpeakerLayout } from '@stream-io/video-react-sdk';
+import { AIChatPanel } from './ai-chat-panel';
 
 interface Props {
   onLeave: () => void;
   meetingName: string;
+  agentName: string;
+  agentInstructions: string;
 }
 
-
-export const CallActive = ({ onLeave, meetingName }: Props) => {
+export const CallActive = ({ onLeave, meetingName, agentName, agentInstructions }: Props) => {
   return (
     <div className="flex flex-col justify-between p-4 h-full text-white">
       <div className="bg-[#101213] rounded-full p-4 flex items-center gap-4">
@@ -21,6 +23,12 @@ export const CallActive = ({ onLeave, meetingName }: Props) => {
       <div className='bg-[#101213] rounded-full px-4'>
         <CallControls onLeave={onLeave} />
       </div>
+
+      {/* AI Chat Panel */}
+      <AIChatPanel
+        agentName={agentName}
+        agentInstructions={agentInstructions}
+      />
     </div>
   );
 };

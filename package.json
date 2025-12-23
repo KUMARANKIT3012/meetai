@@ -13,6 +13,7 @@
   "dependencies": {
     "@dicebear/collection": "^9.2.4",
     "@dicebear/core": "^9.2.4",
+    "@google/generative-ai": "^0.24.1",
     "@hookform/resolvers": "^5.2.2",
     "@neondatabase/serverless": "^1.0.0",
     "@radix-ui/react-accordion": "^1.2.12",
@@ -58,6 +59,7 @@
     "drizzle-kit": "^0.31.1",
     "drizzle-orm": "^0.43.1",
     "embla-carousel-react": "^8.6.0",
+    "groq-sdk": "^0.37.0",
     "humanize-duration": "^3.33.2",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.555.0",
