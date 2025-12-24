@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(request: NextRequest) {
     try {
         const body = await request.json();
-        const { message, agentInstructions, chatHistory = [] } = body;
+        const { message, agentInstructions, chatHistory = [], imageBase64 } = body;
 
         if (!message) {
             return NextResponse.json(
@@ -28,10 +28,12 @@ export async function POST(request: NextRequest) {
             );
         }
 
+        // Pass imageBase64 if provided (vision mode)
         const stream = await streamChatWithAI(
             message,
             agentInstructions,
-            chatHistory
+            chatHistory,
+            imageBase64
         );
 
         // Create a readable stream for the response
